@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    Thank You
+    {% endblock title %}
+</head>
+<body>
+{% block content %}
+<div class="container text-center">
+    <p>
+        <img src="{% static 'image/thank_you.jpg' %}" class="img-thumbnail">
+    </p>
+    <h4 class="alert alert-success">You have Successfully Generated your QR_Code....!! </h4>
+    <center><a href="{% url 'qrcode_app:home' %}" class="btn btn-success">Back to Home</a></center>
+</div>
+{% endblock content %}
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    Generated Data
+    {% endblock title %}
+</head>
+<body>
+{% block content %}
+<div class="row">
+    <div class="col-sm-5">
+        {% if messages %}
+        {% for msg in messages %}
+        <h4 class="alert alert-danger">{{ msg }}</h4>
+        {% endfor %}
+        {% else %}
+        <h4 class="alert alert-success">Qrcode Generated List</h4>
+        {% endif %}
+        <table class="table table-hover">
+            {% if qrdata %}
+            <thead class="text-center">
+            <th>No</th>
+            <th>Name</th>
+            <th>Qrcode Image</th>
+            <th>Action</th>
+            </thead>
+            <tbody class="text-center">
+            {% for qr in qrdata %}
+            <tr>
+                <td>{{ qr.id }}</td>
+                <td>{{ qr.name }}</td>
+                <td>
+                    <a href="{{ qr.qrcode_name.url }}">
+                        <img class="img-thumbnail" src="{{ qr.qrcode_name.url }}" width="20%" height="20%">
+                    </a>
+                </td>
+                <td>
+                    <form method="post" action="{% url 'qrcode_app:del_qrcode_data' qr.id %}">
+                        {% csrf_token %}
+                        <input class="btn btn-warning btn-sm" type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            {% else %}
+            <h3>No Record Found....!!</h3>
+            {% endif %}
+        </table>
+    </div>
+    <div class="col-sm-7">
+        <h4 class="alert alert-success">Barcode Generated List</h4>
+        <table class="table table-hover">
+            {% if brdata %}
+            <thead class="text-center">
+            <th>No</th>
+            <th>Name</th>
+            <th>Country_id</th>
+            <th>Mannuf_id</th>
+            <th>Number_id</th>
+            <th>Image</th>
+            <th>Action</th>
+            </thead>
+            <tbody class="text-center">
+            {% for br in brdata %}
+            <tr>
+                <td>{{ br.id }}</td>
+                <td>{{ br.name }}</td>
+                <td>{{ br.country_id }}</td>
+                <td>{{ br.manufacturer_id }}</td>
+                <td>{{ br.number_id }}</td>
+                <td>
+                    <img src="{{ br.barcode_name.url }}">
+                </td>
+                <td>
+                    <form method="post" action="{% url 'barcode_app:del_barcode_data' br.id %}">
+                        {% csrf_token %}
+                        <input class="btn btn-warning btn-sm" type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            {% else %}
+            <h3>No Record Found...!!</h3>
+            {% endif %}
+        </table>
+    </div>
+</div>
+<center><a href="{% url 'qrcode_app:home' %}" class="btn btn-success">Back to Home</a></center>
+{% endblock content %}
+</body>
+</html>

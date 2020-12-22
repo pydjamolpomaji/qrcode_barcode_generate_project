@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    Qrcode Generator
+    {% endblock title %}
+</head>
+<body>
+{% block content %}
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <h4 class="alert alert-success">Generate QR-Code Using Python - Django</h4>
+        {% csrf_token %}
+        {{ form | crispy }}
+        <p>
+            <input type="submit" value="Submit" class="btn btn-success">
+            <a href="{% url 'barcode_app:barcode_generate' %}">do you want to generate Barcode ?</a>
+        </p>
+    </form>
+</div>
+{% endblock content %}
+</body>
+</html>

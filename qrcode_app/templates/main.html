@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title>
+        Qrcode Barcode Generator
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <style>
+        *{
+            font-family: Times New Roman;
+        }
+        h4{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-3">
+    <h4 class="alert alert-success"> Welcome to QR-Code and Barcode Generator</h4>
+    <center>
+        <a href="{% url 'qrcode_app:qrcode_generate' %}" class="btn btn-success">Generate QR-Code</a>
+        <a href="{% url 'barcode_app:barcode_generate' %}" class="btn btn-success">Generate Barcode</a>
+    </center><br><br><br><br>
+    <center>
+        <a href="{% url 'qrcode_app:generated_data' %}" class="btn btn-warning">View Generated Data</a>
+    </center>
+    {% block content %}
+
+    {% endblock content %}
+</div>
+</body>
+</html>
